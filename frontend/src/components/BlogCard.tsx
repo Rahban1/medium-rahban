@@ -40,7 +40,7 @@ export const BlogCard = ({
     </Link>
 }
 
-function Circle(){
+export function Circle(){
     return <div className="h-1 w-1 rounded-full bg-slate-400">
 
     </div>
@@ -48,7 +48,7 @@ function Circle(){
 
 export function Avatar({ name }: { name: string }){
     return <div
-        className="relative inline-flex items-center justify-center w-7 h-7 overflow-hidden bg-gray-600 rounded-full">
+        className="relative inline-flex items-center justify-center w-9 h-9 overflow-hidden bg-gray-600 rounded-full">
         <span className="text-md text-gray-600 dark:text-gray-300">{name[0].toUpperCase()}</span>
     </div>
     
