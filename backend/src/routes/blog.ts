@@ -91,14 +91,32 @@ blogRouter.put("/",async (c)=>{
     })
   })
   
-blogRouter.get("/bulk",async (c)=>{
-    const prisma = new PrismaClient({
-        datasourceUrl:c.env.DATABASE_URL,
-      }).$extends(withAccelerate()); 
+  blogRouter.get("/bulk", async (c) => {
+    try {
+        const prisma = new PrismaClient({
+            datasourceUrl: c.env.DATABASE_URL,
+        }).$extends(withAccelerate()); 
 
-    const posts = await prisma.post.findMany({});
-    return c.json(posts)
-  })
+        const posts = await prisma.post.findMany({
+            select: {
+                content: true,
+                title: true,
+                id: true,
+                author: {
+                    select: {
+                        name: true
+                    }
+                }
+            }
+        });
+        
+        return c.json(posts);
+    } catch (error) {
+        // Handle the error here
+        console.error("Error occurred:", error);
+        return c.status(500).json({ error: "Internal Server Error" });
+    }
+});
   
 blogRouter.get("/:id", async (c)=>{
     const prisma = new PrismaClient({
@@ -110,6 +128,16 @@ blogRouter.get("/:id", async (c)=>{
         const post = await prisma.post.findFirst({
         where: {
             id
+        },
+        select:{
+            id: true,
+            title: true,
+            content: true,
+            author: {
+                select: {
+                    name: true
+                }
+            }
         }
         })
 
