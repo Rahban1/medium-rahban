@@ -13,7 +13,7 @@ export const Home = ()=>{
                 Discover stories, thinking, and expertise from writers on any topic.
                 </p>
                   <Link to={'/signup'}>
-                    <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 mt-10 font-medium rounded-full text-xl px-14 py-3">Start Reading</button>
+                    <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 mt-6 font-medium rounded-full text-xl px-14 py-3">Start Reading</button>
                   </Link>
 
                 </div>
