@@ -48,7 +48,7 @@ export function Circle(){
 
 export function Avatar({ name }: { name: string }){
     return <div
-        className="relative inline-flex items-center justify-center w-9 h-9 overflow-hidden bg-gray-600 rounded-full">
+        className="relative inline-flex items-center justify-center w-11 h-11 overflow-hidden bg-gray-600 rounded-full">
         <span className="text-md text-gray-600 dark:text-gray-300">{name[0].toUpperCase()}</span>
     </div>
     

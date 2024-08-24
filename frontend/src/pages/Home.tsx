@@ -3,22 +3,22 @@ import { Link } from "react-router-dom"
 
 export const Home = ()=>{
     return (
-        <div>
+        <div className="bg-[#F7F4ED] h-screen border overflow-hidden ">
           <Appbar/>
-          <div className=" px-12 flex flex-col py-12">
-            <div className="pt-6 text-8xl font-semibold">
-                <h1>Stay curious.</h1>
-            </div>
-            <div className="py-4 text-2xl opacity-70">
-                <p>
+          <div className="  flex flex-col  ">
+            <div className="  flex justify-between gap-10 ">
+                <div className="ml-12">
+                  <h1 className="font-custom text-9xl font-semibold mb-5 mt-6">Stay curious.</h1>
+                  <p className="text-2xl mb-10">
                 Discover stories, thinking, and expertise from writers on any topic.
                 </p>
-            </div>
-            <div className=" pt-28">
-                <Link to={'/signup'}>
-                    <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-xl px-14 py-2 me-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Start Reading</button>
-                </Link>            
-            </div>
+                  <Link to={'/signup'}>
+                    <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 mt-10 font-medium rounded-full text-xl px-14 py-3">Start Reading</button>
+                  </Link>
+
+                </div>
+                <img width={600}   src="https://miro.medium.com/v2/format:webp/4*SdjkdS98aKH76I8eD0_qjw.png" alt="" />
+            </div>   
           </div>
         </div>
       )
