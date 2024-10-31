@@ -3,23 +3,15 @@ import { Link } from "react-router-dom"
 
 export const Home = ()=>{
     return (
-        <div className="bg-[#F7F4ED] h-screen border overflow-hidden ">
+        <main className="bg-[#F6F4ED] ">
           <Appbar/>
-          <div className="  flex flex-col  ">
-            <div className="  flex justify-between gap-10 ">
-                <div className="ml-12">
-                  <h1 className="font-custom text-9xl font-semibold mb-5 mt-6">Stay curious.</h1>
-                  <p className="text-2xl mb-10">
-                Discover stories, thinking, and expertise from writers on any topic.
-                </p>
-                  <Link to={'/signup'}>
-                    <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 mt-3 font-medium rounded-full text-xl px-14 py-3">Start Reading</button>
-                  </Link>
-
-                </div>
-                <img width={600}   src="https://miro.medium.com/v2/format:webp/4*SdjkdS98aKH76I8eD0_qjw.png" alt="" />
-            </div>   
+          <div className=" flex  justify-center items-center w-full h-screen">
+            <div className="max-w-[80%] md:max-w-non">
+              <h1 className="text-7xl font-extrabold font-custom">Human stories & ideas</h1>
+              <h3 className="my-3 text-xl font-custom2 ">A place to read, write and deepen your understanding</h3>
+              <button className="bg-green-700 md:bg-black text-white text-center text-xl md:text-3xl rounded-full px-10 py-2 my-4">Start reading</button>
+            </div>
           </div>
-        </div>
+        </main>
       )
 }

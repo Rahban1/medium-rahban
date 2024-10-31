@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         custom: ['MyCustomFont', 'sans-serif'],
+        custom2: ['MyCustomFont2', 'sans-serif'],
       },
     },
   },

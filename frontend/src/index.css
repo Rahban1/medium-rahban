@@ -8,3 +8,10 @@
     font-weight: normal;
     font-style: normal;
   }
+
+@font-face {
+  font-family: 'MyCustomFont2';
+  src: url('/frontend/public/fonts/sohne-400-normal.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
