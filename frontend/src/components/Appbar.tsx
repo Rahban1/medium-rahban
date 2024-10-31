@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import { Avatar } from "./BlogCard"
 
 export const Appbar = ()=>{
     return <div className="border-b border-black flex justify-between px-4 py-4  ">
