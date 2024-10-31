@@ -17,7 +17,7 @@ export const Appbar = ()=>{
             <button type="button" className=" px-4 py-2 rounded-full text-sm md:text-lg font-light ">Sign in</button>
         </Link>
         
-        <Link to={"/publish"} >
+        <Link to={"/signup"} >
             <button type="button" className="bg-black text-white px-4 py-2 rounded-full text-sm md:text-lg font-light">Get started</button>
         </Link>
         </div>
