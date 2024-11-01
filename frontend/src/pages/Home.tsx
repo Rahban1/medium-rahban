@@ -25,7 +25,7 @@ export const Home = () => {
           </div>
           <div className="mt-8 lg:mt-0 w-full max-w-md lg:max-w-lg xl:max-w-xl">
             <img
-              className="w-full h-auto object-cover rounded-lg shadow-lg hidden sm:block"
+              className="w-full h-auto object-cover rounded-lg shadow-lg "
               src="https://miro.medium.com/v2/format:webp/4*SdjkdS98aKH76I8eD0_qjw.png"
               alt="Decorative image"
             />
