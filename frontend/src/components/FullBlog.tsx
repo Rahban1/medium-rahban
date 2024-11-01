@@ -5,16 +5,16 @@ import { Avatar } from "./BlogCard"
 export const FullBlog = ({ blog } : {blog: Blog})=>{
     return <div>
         <Appbar/> 
-        <div className="flex justify-center">
-            <div className="grid grid-cols-12 px-10 w-full pt-20 max-w-screen-xl">
+        <div className="flex justify-center ">
+            <div className="flex flex-col md:grid grid-cols-12 px-10 w-full pt-20 max-w-screen-xl">
                 <div className="col-span-8">
-                    <div className="text-5xl font-extrabold">
+                    <div className="text-2xl md:text-5xl font-extrabold">
                         {blog.title}
                     </div>
                     <div className="text-slate-500 pt-4">
-                        Posted on 2nd December 2023
+                        Posted on 2nd December 2024
                     </div>
-                    <div  className="pt-4">
+                    <div  className="text-base pt-4">
                         {blog.content}
                     </div>
                 </div>
@@ -27,10 +27,10 @@ export const FullBlog = ({ blog } : {blog: Blog})=>{
                             <Avatar name={blog.author.name}/>
                         </div>
                         <div>
-                            <div className="text-xl font-bold">
+                            <div className="text-lg font-bold">
                                 {blog.author.name || "Anonymous"}
                             </div>
-                            <div className="pt-2 text-slate-500">
+                            <div className="pt-2 text-slate-500 text-sm">
                                 Random catch phrase about the author's ability to grab the user's attention
                             </div>
                         </div>
