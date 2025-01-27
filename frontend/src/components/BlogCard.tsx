@@ -37,7 +37,7 @@ export const BlogCard = ({
             onDelete?.();
         } catch (error) {
             toast.dismiss(loadingToast);
-            toast.error('Failed to delete blog');
+            toast.error('Failed to delete, you can only delete your own blogs');
         }
     };
 
