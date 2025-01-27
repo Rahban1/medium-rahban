@@ -4,9 +4,12 @@ import { BlogSkeleton } from "../components/BlogSkeleton";
 import { useBlogs } from "../hooks"
 
 
-function Blogs(){
-    const {loading,blogs} = useBlogs();
+function Blogs() {
+    const { loading, blogs, setBlogs } = useBlogs();
 
+    const handleDelete = (deletedId: string) => {
+        setBlogs(blogs.filter(blog => blog.id !== deletedId));
+    };
 
     if(loading){
         return <div className="w-full">
@@ -23,16 +26,20 @@ function Blogs(){
         </div>
     }
     return <div>
-        <Appbar/>
-        <div className="flex justify-center ">
+        <Appbar />
+        <div className="flex justify-center">
             <div className="w-[85%]">
-                {blogs.map((blog) => <BlogCard
-                    id={blog.id}
-                    authorName={blog.author.name}
-                    title={blog.title}
-                    content={blog.content}
-                    publishedDate={"2nd feb 2023"}
-                />)}
+                {blogs.map((blog) => (
+                    <BlogCard
+                        key={blog.id}
+                        id={blog.id}
+                        authorName={blog.author.name}
+                        title={blog.title}
+                        content={blog.content}
+                        publishedDate={"2nd feb 2023"}
+                        onDelete={() => handleDelete(blog.id)}
+                    />
+                ))}
             </div>
         </div>
     </div>
