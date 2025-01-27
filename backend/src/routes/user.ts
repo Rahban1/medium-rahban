@@ -6,7 +6,7 @@ import { signinInput, signupInput } from "@rahban/medium-common";
 
 export const userRouter = new Hono<{
     Bindings: {
-        DATABASE_URL : string,
+        DATABASE_URL: string,
         JWT_SECRET: string
     }
 }>()
@@ -67,10 +67,17 @@ userRouter.post("/signup",async (c)=>{
 // Add this to your existing userRouter
 
 userRouter.post("/logout", async (c) => {
-    // You can add additional logout logic here if needed
-    // For example, invalidating the token in a token blacklist
-    
-    return c.json({
-        message: "Logged out successfully"
-    });
+    try {
+        // You can add token invalidation logic here if needed
+        return c.json({
+            status: "success",
+            message: "Logged out successfully"
+        });
+    } catch (e) {
+        c.status(500);
+        return c.json({
+            status: "error",
+            message: "Error during logout"
+        });
+    }
 });
