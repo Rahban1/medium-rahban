@@ -14,8 +14,8 @@ export const Appbar = () => {
     }, []);
 
     const handleLogout = async () => {
+        const loadingToast = toast.loading('Logging out...');
         try {
-            const loadingToast = toast.loading('Logging out...');
             await axios.post(`${BACKEND_URL}/api/v1/user/logout`, {}, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -23,9 +23,13 @@ export const Appbar = () => {
             });
             toast.dismiss(loadingToast);
             toast.success('Logged out successfully');
+            localStorage.removeItem("token");
+            setIsLoggedIn(false);
+            navigate('/signin');
         } catch (e) {
-            toast.error('Error logging out');
-        } finally {
+            toast.dismiss(loadingToast);
+            toast.error('Error logging out, but you have been logged out locally');
+            // Still remove the token and redirect even if the server request fails
             localStorage.removeItem("token");
             setIsLoggedIn(false);
             navigate('/signin');
