@@ -42,11 +42,7 @@ export const Appbar = () => {
         ScribbleSphere
       </Link>
       <div className="flex items-center space-x-2 sm:space-x-4">
-        <Link className="hidden md:inline-flex" to={"/my-story"}>
-          <button type="button" className="px-4 py-2 rounded-full text-sm md:text-base font-light hover:bg-gray-100">
-            Our Story
-          </button>
-        </Link>
+        
         <Link to={"/publish"} className="hidden md:inline-flex">
           <button type="button" className="px-4 py-2 rounded-full text-sm md:text-base font-light hover:bg-gray-100">
             Write
