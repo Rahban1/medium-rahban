@@ -64,3 +64,13 @@ userRouter.post("/signup",async (c)=>{
     const jwt = await sign({id: user.id},c.env.JWT_SECRET);
     return c.json({ jwt });
   })
+// Add this to your existing userRouter
+
+userRouter.post("/logout", async (c) => {
+    // You can add additional logout logic here if needed
+    // For example, invalidating the token in a token blacklist
+    
+    return c.json({
+        message: "Logged out successfully"
+    });
+});
