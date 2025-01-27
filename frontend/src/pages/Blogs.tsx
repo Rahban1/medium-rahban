@@ -24,7 +24,7 @@ function Blogs(){
     }
     return <div>
         <Appbar/>
-        <div className="flex justify-center">
+        <div className="flex justify-center border-2 border-black">
             <div>
                 {blogs.map((blog) => <BlogCard
                     id={blog.id}

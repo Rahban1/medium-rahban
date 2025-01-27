@@ -7,19 +7,31 @@ import Blog from './pages/Blog';
 import Blogs from './pages/Blogs';
 import { Publish } from './pages/Publish';
 import { Home } from './pages/Home';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 function App() {
-
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path='/signup' element={<Signup />}></Route>
-          <Route path='/signin' element={<Signin />}></Route>
-          <Route path='/blog/:id' element={<Blog />}></Route>
-          <Route path='/blogs' element={<Blogs/>}></Route>
-          <Route path='/publish' element={<Publish/>}></Route>
+          <Route path="/" element={<Home />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/signin' element={<Signin />} />
+          <Route path='/blog/:id' element={
+            <ProtectedRoute>
+              <Blog />
+            </ProtectedRoute>
+          } />
+          <Route path='/blogs' element={
+            <ProtectedRoute>
+              <Blogs />
+            </ProtectedRoute>
+          } />
+          <Route path='/publish' element={
+            <ProtectedRoute>
+              <Publish />
+            </ProtectedRoute>
+          } />
         </Routes>
       </BrowserRouter>
     </>

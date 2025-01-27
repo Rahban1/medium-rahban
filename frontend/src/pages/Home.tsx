@@ -14,7 +14,7 @@ export const Home = () => {
             <p className="text-lg sm:text-xl md:text-2xl mb-6 md:mb-8">
               Discover stories, thinking, and expertise from writers on any topic.
             </p>
-            <Link to={'/signup'}>
+            <Link to={'/blogs'}>
               <button
                 type="button"
                 className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-full text-base sm:text-lg md:text-xl px-8 sm:px-10 md:px-14 py-2 sm:py-3"

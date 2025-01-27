@@ -1,24 +1,79 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 
-export const Appbar = ()=>{
-    return <div className="border-b border-black flex justify-between px-4 py-4  ">
-            <Link to={'/blogs'} className="flex flex-col justify-center cursor-pointer">
-                Rahban's Blog
-            </Link>
-        <div >
+export const Appbar = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        setIsLoggedIn(!!token);
+    }, []);
+
+    const handleLogout = async () => {
+        try {
+            await axios.post(`${BACKEND_URL}/api/v1/user/logout`, {}, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+        } catch (e) {
+            console.error("Logout error:", e);
+        } finally {
+            localStorage.removeItem("token");
+            setIsLoggedIn(false);
+            navigate('/signin');
+        }
+    };
+
+  return (
+    <div  className="border-b border-black flex flex-wrap justify-between items-center px-4 py-4">
+      <Link to={'/'} className="flex flex-col text-2xl justify-center cursor-pointer">
+        ScribbleSphere
+      </Link>
+      <div className="flex items-center space-x-2 sm:space-x-4">
         <Link className="hidden md:inline-flex" to={"/my-story"}>
-            <button type="button" className=" px-4 py-2 rounded-full text-sm md:text-lg font-light">Our Story</button>
+          <button type="button" className="px-4 py-2 rounded-full text-sm md:text-base font-light hover:bg-gray-100">
+            Our Story
+          </button>
         </Link>
-        <Link to={"/write"} className="hidden md:inline-flex">
-            <button type="button" className=" px-4 py-2 rounded-full text-sm md:text-lg font-light ">Write</button>
+        <Link to={"/publish"} className="hidden md:inline-flex">
+          <button type="button" className="px-4 py-2 rounded-full text-sm md:text-base font-light hover:bg-gray-100">
+            Write
+          </button>
         </Link>
-        <Link to={"/signin"} className="hidden sm:inline-flex">
-            <button type="button" className=" px-4 py-2 rounded-full text-sm md:text-lg font-light ">Sign in</button>
-        </Link>
-        
-        <Link to={"/signup"} >
-            <button type="button" className="bg-black text-white px-4 py-2 rounded-full text-sm md:text-lg font-light">Get started</button>
-        </Link>
-        </div>
+        {!isLoggedIn && (
+          <Link to={"/signin"} className="hidden sm:inline-flex">
+            <button type="button" className="px-4 py-2 rounded-full text-sm md:text-base font-light hover:bg-gray-100">
+              Sign in
+            </button>
+          </Link>
+        )}
+        {isLoggedIn ? (
+          <>
+            <Link to={"/blogs"}>
+              <button type="button" className="bg-black text-white px-4 py-2 rounded-full text-sm md:text-base font-light hover:bg-gray-800">
+                Get started
+              </button>
+            </Link>
+            <button
+              onClick={handleLogout}
+              type="button"
+              className="bg-red-500 text-white px-4 py-2 rounded-full text-sm md:text-base font-light hover:bg-red-600"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link to={"/signup"}>
+            <button type="button" className="bg-black text-white px-4 py-2 rounded-full text-sm md:text-base font-light hover:bg-gray-800">
+              Get started
+            </button>
+          </Link>
+        )}
+      </div>
     </div>
+  )
 }
