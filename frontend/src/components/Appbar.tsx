@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { toast } from 'react-hot-toast';
 
 export const Appbar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -14,13 +15,16 @@ export const Appbar = () => {
 
     const handleLogout = async () => {
         try {
+            const loadingToast = toast.loading('Logging out...');
             await axios.post(`${BACKEND_URL}/api/v1/user/logout`, {}, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
+            toast.dismiss(loadingToast);
+            toast.success('Logged out successfully');
         } catch (e) {
-            console.error("Logout error:", e);
+            toast.error('Error logging out');
         } finally {
             localStorage.removeItem("token");
             setIsLoggedIn(false);

@@ -8,10 +8,12 @@ import Blogs from './pages/Blogs';
 import { Publish } from './pages/Publish';
 import { Home } from './pages/Home';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <>
+      <Toaster position="top-center" />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
