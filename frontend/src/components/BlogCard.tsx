@@ -21,7 +21,6 @@ export const BlogCard = ({
     publishedDate,
     onDelete
 }: BlogCardProps) => {
-    const navigate = useNavigate();
 
     const handleDelete = async (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent navigation
