@@ -9,10 +9,10 @@ function Blogs(){
 
 
     if(loading){
-        return <div>
+        return <div className="w-full">
             <Appbar/>
-            <div className="flex justify-center">
-                <div>
+            <div>
+                <div className="w-[85%] mx-auto ">
                     <BlogSkeleton/>
                     <BlogSkeleton/>
                     <BlogSkeleton/>
@@ -24,8 +24,8 @@ function Blogs(){
     }
     return <div>
         <Appbar/>
-        <div className="flex justify-center border-2 border-black">
-            <div>
+        <div className="flex justify-center ">
+            <div className="w-[85%]">
                 {blogs.map((blog) => <BlogCard
                     id={blog.id}
                     authorName={blog.author.name}
