@@ -151,3 +151,38 @@ blogRouter.get("/:id", async (c)=>{
         })
     }
   })
+blogRouter.delete("/:id", async (c) => {
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate());
+
+    const id = c.req.param('id');
+    const userId = c.get('userId');
+
+    try {
+        // First check if the blog belongs to the user
+        const post = await prisma.post.findFirst({
+            where: { id, authorId: userId }
+        });
+
+        if (!post) {
+            c.status(403);
+            return c.json({
+                message: "You don't have permission to delete this blog"
+            });
+        }
+
+        await prisma.post.delete({
+            where: { id }
+        });
+
+        return c.json({
+            message: "Blog deleted successfully"
+        });
+    } catch (e) {
+        c.status(500);
+        return c.json({
+            message: "Error deleting blog"
+        });
+    }
+});

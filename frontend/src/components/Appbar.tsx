@@ -57,7 +57,7 @@ export const Appbar = () => {
         )}
         {isLoggedIn ? (
           <>
-            <Link to={"/blogs"}>
+            <Link to={"/publish"}>
               <button type="button" className="bg-black text-white px-4 py-2 rounded-full text-sm md:text-base font-light hover:bg-gray-800">
                 Get started
               </button>
