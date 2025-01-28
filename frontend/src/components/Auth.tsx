@@ -14,8 +14,9 @@ export const Auth = ({type} : {type: "signup" | "signin"})=>{
     });
 
     async function sendRequest() {
+        let loadingToast;
         try {
-            const loadingToast = toast.loading(type === 'signup' ? 'Creating your account...' : 'Signing you in...');
+            loadingToast = toast.loading(type === 'signup' ? 'Creating your account...' : 'Signing you in...');
             const response = await axios.post(`${BACKEND_URL}/api/v1/user/${type==='signup' ? "signup" : "signin"}`,postInputs);
             const jwt = response.data.jwt;
             localStorage.setItem("token",jwt);
@@ -23,6 +24,7 @@ export const Auth = ({type} : {type: "signup" | "signin"})=>{
             toast.success(type === 'signup' ? 'Account created successfully!' : 'Welcome back!');
             navigate('/blogs');
         } catch(e) {
+            toast.dismiss(loadingToast);
             toast.error(type === 'signup' ? 'Error creating account' : 'Error signing in');
         }
     }
