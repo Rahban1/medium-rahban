@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { sign } from 'hono/jwt'
 import { signinInput, signupInput } from "@rahban/medium-common";
+import bcrypt from 'bcryptjs';
 
 export const userRouter = new Hono<{
     Bindings: {
@@ -24,10 +25,14 @@ userRouter.post("/signup",async (c)=>{
     }
   
     try {
+      // Hash password with salt (default rounds: 10)
+      const saltRounds = 12; // Higher rounds = more secure but slower
+      const hashedPassword = await bcrypt.hash(body.password, saltRounds);
+      
       const user = await prisma.user.create({
         data: {
           email: body.email,
-          password: body.password,
+          password: hashedPassword,
           name: body.name
         },
       });
@@ -51,15 +56,23 @@ userRouter.post("/signup",async (c)=>{
       c.status(411);
       return c.json({ msg: "invalid inputs / zod error"})
     }
+    // Find user by email only
     const user = await prisma.user.findUnique({
       where: {
-        email: body.email,
-        password: body.password
+        email: body.email
       }
     });
+    
     if(!user){
       c.status(403);
-      return c.json({msg: "user not found"});
+      return c.json({msg: "invalid credentials"});
+    }
+    
+    // Verify password using bcrypt
+    const isPasswordValid = await bcrypt.compare(body.password, user.password);
+    if(!isPasswordValid){
+      c.status(403);
+      return c.json({msg: "invalid credentials"});
     }
     const jwt = await sign({id: user.id},c.env.JWT_SECRET);
     return c.json({ jwt });
